@@ -3,6 +3,8 @@ import logging
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+from app.config import settings
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
@@ -26,4 +28,4 @@ async def root() -> Message:
 @router.get("/health", response_model=Health)
 async def health() -> Health:
     logger.debug("health check")
-    return Health(status="ok", version="1.0.0")
+    return Health(status="ok", version=settings.app_version)

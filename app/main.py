@@ -1,5 +1,5 @@
 import logging
-from collections.abc import AsyncIterator
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi_offline import FastAPIOffline
@@ -18,7 +18,7 @@ def configure_logging() -> None:
 
 
 @asynccontextmanager
-async def lifespan(_app: FastAPIOffline) -> AsyncIterator[None]:
+async def lifespan(_app: FastAPIOffline) -> AsyncGenerator[None]:
     configure_logging()
     logging.getLogger(__name__).info(
         "%s v%s (%s)", settings.app_name, settings.app_version, settings.app_env
